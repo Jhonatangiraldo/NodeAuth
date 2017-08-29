@@ -9,16 +9,18 @@ var User   = require('./app/model/user');
 
 var authenticateController = require('./app/controller/authenticate-controller');
 var loginController = require('./app/controller/login-controller');
+var userController = require('./app/controller/user-controller');
 
 mongoose.connect("mongodb://admin:123456@ds151963.mlab.com:51963/letflix"); 
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
-app.set('superSecret', config.secret); 
 
 app.use(authenticateController);
 app.post('/authenticate', loginController);
+app.post('/user', userController);
+
 app.get('/', function(req, res) {
     res.json({"hello": "hello"});
 });

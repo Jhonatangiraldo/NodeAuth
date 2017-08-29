@@ -17,16 +17,16 @@ const success = function (token) {
     }
 };
 
-function login(req, res) {
-    if (req.body.name != "juan") {
-       res.json(failed);
+function login(request, response) {
+    if (request.body.name != "juan") {
+       response.json(failed);
        return;
     }
     
     var user = {"name":"juan", "username":"username"};
     var token = jwt.sign(user, config.secret);
 
-    res.json(success(token));
+    response.json(success(token));
 }
 
 module.exports = login;

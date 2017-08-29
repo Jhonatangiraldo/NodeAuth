@@ -11,30 +11,30 @@ const failedToAuthenticate = {
       message: 'Failed to authenticate token.' 
 };
 
-function verify(req, res, next) {
-    if (verifyAuthenticate(req, next)) {
+function verify(request, response, next) {
+    if (verifyAuthenticate(request)) {
         next();
         return;
     }
 
-    var token = req.body.token || req.query.token || req.headers['access_token'];
+    var token = request.body.token || request.query.token || request.headers['access_token'];
     if (token) {
-        verifyToken(token, req, res, next);
+        verifyToken(token, request, response, next);
     } else {
-        return res.status(403).send(noTokenProvided);
+        return response.status(403).send(noTokenProvided);
     }
 };
 
-function verifyAuthenticate(req, next) {
-    return req.path === '/authenticate' && req.method === 'POST';
+function verifyAuthenticate(request) {
+    return request.path === '/authenticate' && request.method === 'POST';
 }
 
-function verifyToken(token, req, res, next) {
-  jwt.verify(token, config.secret, function(err, decoded) {      
-      if (err) {
-          return res.json(failedToAuthenticate);    
+function verifyToken(token, request, response, next) {
+  jwt.verify(token, config.secret, function(error, decoded) {      
+      if (error) {
+          return response.json(failedToAuthenticate);    
       } else {
-          req.decoded = decoded;    
+          request.decoded = decoded;    
           next();
       }
   });
