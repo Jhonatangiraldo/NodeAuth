@@ -19,11 +19,10 @@ app.use(cors());
 
 app.use(authenticateController);
 app.post('/authenticate', loginController.login);
+app.get('/logged', loginController.logged);
+
 app.post('/user', userController.createUser);
 
-app.get('/', function(req, res) {
-    res.json({"hello": "hello"});
-});
 
 var port = process.env.PORT || 8080;
 app.listen(port);

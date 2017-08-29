@@ -25,13 +25,13 @@ var createUser = function(request, response) {
     });
 };
 
-function hashPassword() {
-    return bcrypt.hash("password", saltRounds);
+function hashPassword(request) {
+    return bcrypt.hash(request.body.password, saltRounds);
 }
 
 function retrieveUser(request, password) {
     var newUser = new User({
-        username: "username",
+        username: request.body.username,
         password: password
     });
     return newUser;

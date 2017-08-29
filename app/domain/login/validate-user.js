@@ -35,14 +35,10 @@ function handleResponse(error, result){
         response.json(failed);
     } else {
         comparePasswords(user, result, response);
-        /*let token = jwt.sign(result, config.secret);
-        response.json(success(token));*/
     }
 };
 
 function comparePasswords(user, resultQuery, response) {
-    console.log(user);
-    console.log(user.password);
     bcrypt.compare(user.password, resultQuery.password, 
                    resultComparePasswords.bind({'response':response, 'user':user}));
 };

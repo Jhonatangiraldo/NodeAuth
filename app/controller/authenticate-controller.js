@@ -26,7 +26,8 @@ function verify(request, response, next) {
 };
 
 function verifyAuthenticate(request) {
-    return request.path === '/authenticate' && request.method === 'POST';
+    return request.method === 'POST' &&
+           (request.path === '/authenticate' || request.path === '/user');
 }
 
 function verifyToken(token, request, response, next) {
