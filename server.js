@@ -18,8 +18,8 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use(authenticateController);
-app.post('/authenticate', loginController);
-app.post('/user', userController);
+app.post('/authenticate', loginController.login);
+app.post('/user', userController.createUser);
 
 app.get('/', function(req, res) {
     res.json({"hello": "hello"});
