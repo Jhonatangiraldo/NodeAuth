@@ -12,4 +12,4 @@ function logged(request, response) {
 }
 
 module.exports.login = login;
-module.exports .logged = logged;
+module.exports.logged = logged;
